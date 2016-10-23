@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Parallax</title>
+	<script src="JS/parallax.js"></script>
+	<script src="JS/swiper.min.js"></script>
+	<link rel="stylesheet" href="stylesheets/swiper.min.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html,body {
+			position: relative;
+			height: 100%;
+			font-family: Arial,"Microsoft YaHei","微软雅黑";
+		}
+		#background {
+			width: 100%;
+			height: 100%;
+			background: -webkit-linear-gradient(top,#112833,#1e4356);/*new gradient for Webkit*/
+			background: -moz-linear-gradient(top,#112833,#1e4356);/*Mozilla*/
+			background: -o-linear-gradient(top,#112833,#1e4356); /*Opera11*/
+			background: linear-gradient(top,#112833,#1e4356);
+			overflow: hidden;
+		}
+		#scene {
+			width: 100%;
+			height: 100%;
+		}
+		.layer {
+			position: absolute;
+		}
+		.layer img {
+			width: 100%;
+			height: 100%;
+		}
+		.swiper-container {
+			position: absolute;
+			box-sizing: border-box;
+			width: 50%;
+	        left: 50%;
+	        top: 50%;
+	        transform: translate(-50%,-50%);
+	    }
+	    .swiper-slide {
+	    	position: relative;
+
+	        width: 100%;
+	        height: 100%;
+	        box-sizing: border-box;
+	        padding: 6px 10px;
+			background-color: #fff;
+			opacity: 0.8;
+			color: #fff;
+
+			-webkit-border-top-left-radius: 35px;
+			-webkit-border-top-right-radius: 35px;
+			-webkit-border-bottom-left-radius: 35px;
+			-webkit-border-bottom-right-radius: 35px;
+			border-top-left-radius: 35px;
+			border-top-right-radius: 35px;
+			border-bottom-left-radius: 35px;
+			border-bottom-right-radius: 35px;
+			-webkit-box-shadow: 3px 4px 5px .5px #393939;
+			box-shadow: 3px 4px 5px .5px #393939;
+
+			 /* Center slide text vertically */
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: -webkit-flex;
+	        display: flex;
+	        -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	        -webkit-justify-content: center;
+	        justify-content: center;
+	        -webkit-box-align: center;
+	        -ms-flex-align: center;
+	        -webkit-align-items: center;
+	        align-items: center;
+	    }
+	    .header {
+			font-size: 24px;
+			font-weight: bold;
+			text-align: center;
+			line-height: 1.3em;
+	    }
+	    .sub {
+	    	font-size: 12px;
+	    	position: absolute;
+	    	bottom: 5%;
+	    	left: 50%;
+	    	transform: translateX(-50%);
+	    	-webkit-transform: translateX(-50%);
+	    }
+	    .end {
+			font-size: 20px;
+			color: #292929;
+			display: inline-block;
+			text-align: left;
+			line-height: 1.75em;
+	    }
+	    .end span {
+	    	font-size: 30px;
+	    	padding: 2px 4px;
+	    	color: #fff;
+	    	background-color: #292929;
+			line-height: 1em;
+			display: inline-block;
+			-webkit-transform: translateY(-10%);
+			transform: translateY(-10%);
+	    }
+		.note {
+			color: #292929;
+			border-left: 2px solid #292929;
+			padding-left: 3px;
+			text-align: left;
+		}
+	</style>
+	<script>
+		document.addEventListener('touchstart',
+			function(ev){
+				ev.preventDefault();
+			}
+		);
+		window.onload = function () {
+			var oUl = document.getElementById('scene');
+			var liNum = 28;
+			var arr = [];
+			var aImg = [];
+			var num = 0;
+
+			var container = document.querySelector('.swiper-container');
+			container.style.height = container.offsetWidth + 'px';
+
+			for (var i = 0; i < liNum; i++) {
+				arr[i] = document.createElement('li');
+				oUl.appendChild(arr[i]);
+				arr[i].setAttribute('class','layer');
+			}
+			var aLi = oUl.getElementsByTagName('li');
+			for (var i = 0; i < aLi.length; i++) {
+				aImg[i] = document.createElement('img');
+				aLi[i].appendChild(aImg[i]);
+				aImg[i].setAttribute('src','img/qp.png');
+			}
+			
+			for (var i = 0; i < aLi.length; i++) {
+				num = Math.random().toFixed(2);
+				aImg[i].style.opacity = num.toString();
+				aLi[i].setAttribute('data-depth',num.toString())
+				aLi[i].style.width = aLi[i].style.height = num*50 + 'px';
+			}
+			var parallax = new Parallax(scene);
+			for (var i = 0; i < aLi.length; i++) {
+				num = Math.random();
+				aLi[i].style.left = num*100 + '%';
+				num = Math.random();
+				aLi[i].style.top = num*100 + '%';
+			}
+
+			var slide = document.querySelectorAll('.swiper-slide');
+			slide[slide.length - 1].addEventListener('touchend',
+				function() {
+					window.location.href = 'https://weidian.com/i/1973504665?wfr=c';
+				}
+			);
+		}
+	</script>
+</head>
+<body>
+	<!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: #051928;">
+            	<h3 class="header">你好</h3>
+            	<p class="sub">向左滑动可翻页</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #070528;">
+            	<h3 class="header" style="font-size: 20px;">先晃动手机试试吧</h3>
+            	<p class="sub">向左滑动可翻页</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #280525;">
+            	<h3 class="header" style="font-size: 20px;">你知道吗？</h3>
+            	<p class="sub">向左滑动可翻页</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #282105;">
+            	<h3 class="header" style="font-size: 20px;">看似简单的 H5 也有很多讲究</h3>
+            	<p class="sub">向左滑动可翻页</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #052826;">
+            	<h3 class="header" style="font-size: 20px;">比如后面<br>漂浮的气泡</h3>
+            	<p class="sub">向左滑动可翻页</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #4d3c0a;">
+            	<h3 class="header" style="font-size: 20px;">每个气泡的透明度都不一样</h3>
+            	<p class="sub">向左滑动可翻页</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #3f4d0a;">
+            	<h3 class="header" style="font-size: 20px;">每个气泡的大小也都不一样</h3>
+            	<p class="sub">向左滑动可翻页</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #08402e;">
+            	<h3 class="header" style="font-size: 20px;">每个气泡的偏移量更不一样</h3>
+            	<p class="sub">向左滑动可翻页</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #0d6663;">
+            	<h3 class="header" style="font-size: 20px;">必须每个细节<br>都考虑到</h3>
+            	<p class="sub">向左滑动可翻页</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #280505;">
+            	<h3 class="header" style="font-size: 20px;">才能做出一个<br>梦幻的 H5 Demo</h3>
+            	<p class="sub">向左滑动可翻页</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #268c84;">
+            	<h3 class="header" style="font-size: 20px;">知道我们H5设计师<br>多不容易了吧！</h3>
+            	<p class="sub" style="bottom: 28%; font-size: 10px; font-weight: bold;">尤其是甲方爸爸们</p>
+            	<p class="sub">向左滑动可翻页</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #d16d82;">
+            	<h3 class="header" style="font-size: 20px;">想知道怎么快速做<br>这个 H5 Demo ?</h3>
+            	<p class="sub">向左滑动可翻页</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #fff;">
+            		<h3 class="header end"><span>点我</span>参加<br>水果们线下沙龙</h3>
+            		<p class="sub note">手把手教你入门<br>H5 设计</p>
+            </div>
+        </div>
+    </div>
+
+	<div id="background">
+		<ul id="scene">
+		</ul>
+	</div>
+
+	<script>
+		var swiper = new Swiper('.swiper-container', {
+	        effect: 'flip'
+	    });
+	</script>
+</body>
+</html>
